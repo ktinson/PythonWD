@@ -1,6 +1,7 @@
 # env
 .venv
 .env
+env
 #dependencies
 node_modules
 # dependencies

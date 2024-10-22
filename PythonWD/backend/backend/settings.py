@@ -25,31 +25,34 @@ SECRET_KEY = 'django-insecure-+_wm=lk2%a%#ej3x*5m(1isv#af)bxck3#kwojjuun@50zdjtg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS=['localhost', '127.0.0.1', '*', ]
+ALLOWED_HOSTS=['localhost', '127.0.0.1', '*', 'https://learningplan-k-tinson.onrender.com',
+     'https://learningplan-k-tinson-main.onrender.com', 'http://learningplan-k-tinson.onrender.com',
+     'http://learningplan-k-tinson-main.onrender.com', 'https://deploypl.netlify.app']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
     'rest_framework',
     'pyAws',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    
 
 ]
 
@@ -127,17 +130,30 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000',
-     "http://127.0.0.1:8000",
-     'http://localhost:3000',
-     'http://learningplan-k-tinson.onrender.com',
      'http://learningplan-k-tinson-main.onrender.com',
-     'http://learningplan-k-tinson-frontend.onrender.com',
+     'https://learningplan-k-tinson-main.onrender.com',
+     'https://deploypl.netlify.app'
+    #  'http://learningplan-k-tinson-frontend.onrender.com',
 ]
 CORS_ALLOWED_ORIGINS = [
-
 "http://127.0.0.1:8000",
 'http://localhost:3000',
+'https://deploypl.netlify.app',
 'http://learningplan-k-tinson.onrender.com',
+'https://learningplan-k-tinson.onrender.com',
 'http://learningplan-k-tinson-main.onrender.com',
-'http://learningplan-k-tinson-frontend.onrender.com',
+'https://learningplan-k-tinson-main.onrender.com',
+# 'http://learningplan-k-tinson-frontend.onrender.com',
+]
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
