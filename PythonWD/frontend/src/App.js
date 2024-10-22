@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import Modal from "./components/Modal";
+import Modal from "./components/Modal.js";
 import {Button, CardActions, Typography, CardContent, CardMedia, Card, Grid} from '@mui/material/';
-
+import apiURL from "./api.js";
 import axios from "axios";
-const apiURL = process.env.REACT_APP_API_URL || "http://localhost:8000" || "https://learningplan-k-tinson.onrender.com";
+const PORT = process.env.PORT || 3000;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,9 +31,9 @@ class App extends Component {
       .get(`${apiURL}/api/cards/`)
       .then((res) => this.setState({ cardList: res.data }))
       .catch((err) => console.log(err));
-    console.log(apiURL, "apiurl this")
+    console.log(`${apiURL}/api/cards/`, `api url`)
     console.log(process.env.REACT_APP_API_URL, "REACT_APP_API_URL")
-
+    console.log(process.env.PORT, `process env PORT`)
     console.log(process.env.NODE_ENV, "NODE_ENV")
    
   };
@@ -48,17 +49,22 @@ class App extends Component {
       axios
         .put(`${apiURL}/api/cards/${item.id}/`, item)
         .then((res) => this.refreshList());
+        console.log(`${apiURL}/api/cards/${item.id}/`, item)
+
       return;
     }
     axios
       .post(`${apiURL}/api/cards/`, item)
       .then((res) => this.refreshList());
+      console.log(`${apiURL}/api/cards/${item.id}/`, item)
+
   };
 
   handleDelete = (item) => {
     axios
       .delete(`${apiURL}/api/cards/${item.id}/`)
       .then((res) => this.refreshList());
+        console.log(`${apiURL}/api/cards/${item.id}/`, item)
   };
 
   createItem = () => {
@@ -185,6 +191,7 @@ class App extends Component {
               </div>
               {this.renderTabList()}
               <div style={{padding: "50px"}}>
+                <p>{ `${apiURL}${PORT}`}</p>
                 {this.renderItems()}
                 </div>
             
